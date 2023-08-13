@@ -1,0 +1,56 @@
+SOLID Principles
+	design principles that make s/w designs more understandable, flexible and maintainable
+Adv:
+	1. Maintainability
+	2. Testability
+	3. Flexibility and Extensibility
+	4. Parallel Development
+	5. Loose Coupling
+	
+S->Single Responsibility Principle
+	-A class should have only one reason to change
+	-Every module or class should have responsibility over a single part of the functionality 
+	provided by the software, and that responsibility should be entirely encapsulated by the class
+	-Every Class and module should focus on a single task at a time
+
+O->Open Closed Principle
+	- S/w entities should be open for extension, but closed for modification
+	- Meaning: The design and writing of the code should be done in a way that new functionality should be
+	added with minimum changes in the existing code
+	- The design should be done in a way to allow the adding of new functionality as new classes, keeping 
+	as much possible existing code unchanged.
+	- Implement the new functionality on new derived classes
+	- Allow clients to access the original class with abstract interface
+	
+I->Interface Segregation principle
+	- Many client specific interfaces are better than one general purpose interface
+	- We should not enforce clients to implement interfaces that they don't use. Instead
+	of creating one big interface we can break down it to smaller interfaces.
+	
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Not Done: https://www.youtube.com/watch?v=gnKx1RW_2Rk&list=PL6n9fhu94yhXjG1w2blMXUzyDrZ_eyOme&index=5	
+
+L->Liskov substitution principle (extension of open-closed principles)
+	- Object in a program should be replaceable with instances of their subtypes without altering the
+	correctness of that program
+	- Meaning: If a program module is using a Base class, then the reference to the base class can be 
+	replaced with a derived class without affecting the functionality of the program module
+	- Also can be stated as derived types must be substitutable for their base types
+	
+D->Dependency Inversion principle
+	One should depend upon abstraction and not concretions
+	Abstractions should not depend on the details whereas the details should depend on abstraction.
+	High level module should not depend on low level modules
+	
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+Singleton design pattern
+	Ensure that only one instance of a class is created and provide a global point of access to that instance.
+	used when it's important to have only one instance for a class and that instance is globally accessible.
+	Eg: In a system, there should be only one logging system throughout the system.
+	Singleton Pattern is a design solution where an application wants to have one and only one instance of the class.
+	For creating the singleton instance, we need to create a private constructor of the class with the getInstance() method to check if the object is null.
+	
+	
+
+	

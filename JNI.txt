@@ -1,0 +1,61 @@
+JNI(Java Native Interface)
+	- Allows java programs to interact with native code written in other programming langauges C/C++ or assembly.
+	- Many Scientific libraries are written in C/C++
+	- Enables java applications to call functions written in these native languages and vice versa.
+	- Serve as bridge between the JVM and native code which enables communication and data exchange.
+	- JNI provides a way for java programs to acess platform-specific or hardware specific functionalities that are not available in pure Java.
+
+Steps to follow:
+
+For Ubuntu
+	1. Create Java Class JNI.java
+		
+		public class JNI{
+			static{
+				System.load("/usr/lib/libJNI.so");
+			}
+			
+			public native void sayHi();
+			public native int sum(int a,int b);
+			
+			public static void main(String[] args){
+				JNI j = new JNI();
+				j.sayHi();
+				int result = j.sum(10,20);
+				System.out.println(result);
+			}
+		}
+	
+	2. Compile the java code using command: javac -h . JNI.java
+		- This creates JNI.h file and JNI.class file.
+		- JNI.h file contains declaration of methods that we want to create in C(Copy those declarations and write the c code)
+		
+	3. C Code(JNI.c)
+	
+		#include "JNI.h"
+		JNIEXPORT void JNICALL Java_JNI_sayHi(JNIEnv *env, jobject obj){
+			printf("Hi How are you Doing?\n");
+		}
+		
+		JNIEXPORT jint JNICALL Java_JNI_sum(JNIEnv *env, jobject obj, jint a,jint b){
+			return a+b;
+		}
+	
+	4. Run following command
+		$gcc -o libJNI -shared -fPIC -I/{Path to the include folder of your java version(find it in usr/lib....)} -I/{Path to the linux folder inside include folder of your java version(find it in usr/lib....)} JNI.c -lc
+		
+	5. Move the .so file to /usr/lib directory
+		$sudo cp libJNI.so /user/lib
+		
+	6. Run the code and you will get the output.
+	
+Usage:
+	1. Access Native Libraries.
+	2. Hardware access: Provides way to access hardware-specific features or low-level functionalities that are not available in the standard Java API.
+	3. Performance Optimization: JNI can be used to call native code for computationally intensive tasks, where the performance of native code can be significantly better than equivalent java code.
+	4. Integration with Existing systems: Enables integration of java applications with existing systems or legacy codebases written in other languages. Allow seamless communication between Java and Non-Java components in an application.
+	5. Platform -specific functionality: Allow java program to access to platform-specific features, OS APIs that are not available in platform-independent manner in java
+	6. Porting and Migration
+	7. Access to OS-Specific libraries
+	
+Languages supported: C/C++, Assembly langauge, Fortran, Rust, etc.

@@ -1,0 +1,66 @@
+Execution Sequence: FROM -> WHERE -> SELECT -> DISTINCT -> ORDER BY
+
+1. Querying Data
+	- SELECT FROM
+	- SELECT:  means that you can have a SELECT statement without the FROM clause
+			Syntax: SELECT select_list;
+			Eg.
+				SELECT 1+1;
+			OUTPUT:
+					1+1
+					  2
+			- MySQL has many built-in functions like string, date, and Math functions. And you can use the SELECT statement to execute these functions
+			Eg: SELECT NOW(); ->current date and time
+			- Use the dual table if you want to use the FROM clause but don’t want to reference a table.
+			Eg: SELECT select_list FROM dual;
+			- Assign an alias to a column to make it more readable
+			Eg: SELECT expression AS column_alias;
+
+2. Sorting data
+	ORDER BY: 
+		Syntax: 
+		SELECT select_list
+		FROM table_name
+		ORDER BY 
+			column1 [ASC|DESC], 
+			column2 [ASC|DESC],
+			...;
+			
+		
+		
+3. Filtering Data
+	WHERE
+	SELECT DISTINCT
+	AND
+	OR
+	IN: - The IN operator allows you to determine if a value matches any value in a list of values. Here’s the syntax of the IN operator:
+		- syntax: value IN (value1, value2, value3,...)
+		- The IN operator returns 1 (true) if the value equals any value in the list (value1, value2, value3,…). Otherwise, it returns 0.
+		- The IN operator is functionally equivalent to the combination of multiple OR operators: value = value1 OR value = value2 OR value = value3 OR ...
+	NOT IN: - The NOT operator negates the IN operator
+	BETWEEN: - The BETWEEN operator is a logical operator that specifies whether a value is in a range or not. Here’s the syntax of the BETWEEN operator:
+			 - sytnax: value BETWEEN low AND high;
+			 - The BETWEEN operator returns 1 if: value >= low AND value <= high
+			 - Otherwise, it returns 0.
+	LIKE: - The LIKE operator is a logical operator that tests whether a string contains a specified pattern or not.
+		  - Syntax: expression LIKE pattern ESCAPE escape_character
+		  - In this syntax, if the expression matches the pattern, the LIKE operator returns 1. Otherwise, it returns 0.
+		  - MySQL provides two wildcard characters for constructing patterns: percentage % and underscore _ .
+		  - The percentage ( % ) wildcard matches any string of zero or more characters.
+		  - The underscore ( _ ) wildcard matches any single character.
+		  - For example, s% matches any string starts with the character s such as sun and six. The se_ matches any string starts with  se and is followed by any character such as see and sea.
+		  - When the pattern contains the wildcard character and you want to treat it as a regular character, you can use the ESCAPE clause.
+	LIMIT - The LIMIT clause is used in the SELECT statement to constrain the number of rows to return. 
+		  -	syntax: SELECT select_list FROM table_name LIMIT [offset,] row_count;
+		  - The offset specifies the offset of the first row to return. The offset of the first row is 0, not 1.
+          - The row_count specifies the maximum number of rows to return.
+	IS NULL - To test whether a value is NULL or not, you use the  IS NULL operator. Here’s the basic syntax of the IS NULL operator:
+			- syntax: value IS NULL
+			- If the value is NULL, the expression returns true. Otherwise, it returns false.
+			
+
+4. Joining Tables
+	Inner Join: - The INNER JOIN matches each row in one table with every row in other tables and allows you to query rows that contain columns from both tables.
+				- The INNER JOIN is an optional clause of the SELECT statement. It appears immediately after the FROM clause. Here is the syntax of the INNER JOIN clause:
+					Syntax: SELECT select_list FROM t1 INNER JOIN t2 ON join_condition1 INNER JOIN t3 ON join_condition2 ...;
+	

@@ -1,0 +1,5 @@
+1. Java
+	JNI
+	Multithreading
+2. Git
+3. MySQL

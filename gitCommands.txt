@@ -1,0 +1,223 @@
+01. To Check Status: $git status
+02. To initialize a git repo: $git init
+03. To see all files/folders hidden/unhidden: $ls -a
+04. To delete a folder: $rm -rf folder_name
+05. To delete a git repository delete the .git folder: $rm -rf .git
+06. Working directory-->$git add-->Staging Area-->$git commit-->Repository
+07. To add specific files to the staging area: $git add file1 file2
+08. To commit changes: $git commit -m "my message"
+09. To add all files to the staging area: $git add . 
+10. To list log of commits for a given repository: $git log
+	
+	Note: Keep each commit focused on a single thing
+
+11. Redo the previous commit using --amend option:
+	Lets say you forget to add a file in previous commit then follow the below steps
+		1. Add that file: $git add file_name
+		2. $git commit --amend
+		3. This will open the default text editor to edit the commit the msg
+		4. Close the file and it's done
+12. Ignoring Files
+	Using a .gitignore file we can tell git to ignore files and directories.
+		Eg: Secrets, API Keys, credentials, etc
+			OS files(.DS_Store on Mac)
+			Log Files
+			Dependencies & packages
+		Refer: gitignore.io
+
+13. Git Branching
+	- In git, we are always working on a branch. The default branch name is master.
+	- In 2020, Github renamed the default branch from master to main.
+	- Head
+		- A pointer that referes to the current location in your repo.
+		- Points to a particular branch reference.
+		- Always point to latest commit made on master branch
+	(List) - $git branch 
+		- View your existing branches.
+		- * indicates the branch you are currently on.
+	(Create) - $git branch <branch-name> 
+		- To make a new branch based upo the current HEAD
+		- Just creates the branch, does not switch to newly created branch.
+	(Switch) - $git switch <branch-name> 
+					- After creating new Branch, use this command to switch to it.
+			 - $git checkout <branch-name>
+					- Used in past, deprecated but still can be used.
+	(Create and Switch) - $git switch -c <branch-name>
+					- Create a new branch and switch to it all in one go.
+					- '-c' is for create.
+	NOTE: If we try to switch before we commit our changes then our changes will get lost. Hence we should commit the changes or stash them before switching the branch.
+	(Delete) - $git branch -d <branch-name> or $git branch --delete <branch-name>
+	(Force Delete) - $git branch -D <branch-name> or $git branch --delete --force <branch-name>
+		- Inorder to delete a branch we have to go to anyother branch but we can't stay on that branch.
+	(Move/Rename) - $git branch -m <new-branch-name>
+		- first change to the branch that you want to rename and then rename it.
+	
+14. Merging Branches
+		- To incorporate changes from one branch into another we merge branches.
+		- We merge branches, not specific commits
+		- We always merge to the current HEAD branch
+		To merge, follow these basic steps:
+			1. Switch to or checkout the branch you want to merge the changes into(The receiving branch)
+			2. Use the git merge command to merge changes from a specific branch into the current branch
+				Eg. To merge the bugfix branch into master
+					$git switch master
+					$git merge bugfix
+		- Fast forward merge
+			- When git moves the source branch pointer to the target branch pointer without creating an extra merge commit.
+			- Happen when there is a direct linear path from the source branch to the target branch.
+					1. Before merge
+					commit1---commit2---commit3---commit4
+								|                   |
+							  Master<-head        Bugfix
+					2. After merge
+					
+												Master<-Head
+													|
+					commit1---commit2---commit3---commit4
+													|
+												  Bugfix
+	 
+	 
+	 
+		- merge commit(without conflict)
+			In below given scenario git makes a commit for us on the branch that we're merging into the recipient branch.
+			It makes a new commit for us and it will prompt us to include a message.
+			commit can have multiple different parent commits
+													Master<---HEAD
+													   |
+					commit1---commit2---commit3--------New commit
+								|					  /
+								|---commita---commitb/
+												|
+											   Bugfix
+		
+		- Doubt: What is merge made by the 'ort' strategy
+		- Merge Conflict
+			- Depending on the specific changes you are trying to merge, Git may not be able to automatically merge.
+			- This results in merge conflicts, which you need to manually resolve.
+			- When you do git merge and there are some conflicts then this is what you get
+				CONFLICT(content): Merge conflict in file.txt
+				Automatic merge failed; fix conflicts and then commit the result.
+			- Resolving Conflicts
+				1. Open up the file(s) with merge conflict
+				2. Edit the file(s) to remove the conflicts. Decide which branch's content you want to keep in each conflict. Or keep the content from both.
+				3. Remove the conflict markers in the document
+				4. Add your changes and then make a commit
+
+15. git Diff
+	- We use this command to view changes between commits, branches, files, our working directory and more.
+	- $git diff: Lists all the changes in our working directory that are NOT staged(unstaged) for the next commit.
+	- How to read git diff
+		1. Comparing Files
+			- For each comparison, git explains which files it is comparing. Usually this is two versions of the same file.
+			- Git also declares one file as "A" and the other as "B".
+		2. File Metadata
+			- The first two numbers are the hashes of the two files being compared. 
+			- The last number is an internal file mode identifier.
+		3. Markers
+			- File A and File B are each assigned a symbol
+				File A gets a minus sign(-)
+				File B gets a plus sign(+)
+		4. Chunks
+			- A diff won't show the entire contents of a file, but instead only shows portions or chunks that were modified.
+			- A chunk also includes some unchanged lines before and after a change to provide some context.
+			- Chunk Header
+				@@-3,4 +3,5@@ ->meaning: From file a, 4 lines are extracted starting from line 3. From file b, 5 lines are extracted starting from line 3.
+				Each chunk starts with a chunk header, found between @@ and @@
+		5. Changes
+			- Every line that changed between the two files is marked with either a + or - symbol.
+				- lines that begin with - come from file A
+				- lines that begin with + come from file B
+	- Comparing Commits
+		To compare two commits, provide git diff the commit hashes of the commits in question
+			$git diff commit1..commit2
+	- $git diff Head
+		- This command lists all changes in the working tree since your last commit.
+	- $git diff --staged or $git diff --cached
+		- list the changes between the stagin area and our last commit.(Show me what will be included in my commit if i run commit right now)
+	- Diff-ing Specific files
+		- git diff HEAD HEAD~1 --> (HEAD~1: The parent commit of HEAD)
+		- $git diff HEAD [filename]
+		- $git diff --staged [filename]
+			- We can view the changes within a specific file by providing git diff with a filename
+	- Comparing Changes across Branches
+		- $git diff branch1..branch2
+			- Will list the changes between the tips of branch1 and branch2.
+			
+16. Git Stashing
+	- Allows to temporarily save your changes in a stash without commiting them to your repository.
+	- Useful when you're working on a certain task or feature, but you're not ready to commit your changes yet.
+	- Allow you to switch to a different branch or perform other operations without the need to commit incomplete work.
+	- When we do stashing git saves the modified files and their current states.
+	- $git stash
+		- helps to save changes that you are not yet ready to commit. You can stash changes and then come back to the later.
+		- Running git stash will take all uncommitted changes(staged and unstaged) and stash them, reverting the changes in your working copy.
+	- $git stash pop
+		- To remove the most recently stashed changes in your stash and reaaply them to your working copy.
+	- $git stash save "your message here"
+		- save your changes and give them a stash reference with a message that you provide.
+	- $git stash apply
+		- To apply the stashed changes back to your working directory.
+	- $git stash list
+		- To see a list of stash 
+	- $git stash branch new-branch-name
+		- Apply stash to new branch
+	- $git stash drop stash@{n}
+		- Delete the desired stash by providing its reference from stash list. (n- reference)
+
+17. Undoing Changes and Time Traveling
+
+	- CheckOut
+		We use $git checkout <commit-hash> to view previous commit. We juse need the first 7 digits of a commit hash.
+		1. Usually, HEAD points to a specific branch reference rather than a particular commit. 
+		2. HEAD is a pointer to the current branch reference
+		3. The branch reference is a pointer to the last commit made on a particular branch.
+		4. When we make a new commit, the branch reference is updated to reflect the new commit.
+		5. The HEAD remains the same, because it's pointing at the branch reference.
+		6. When we switch branches, HEAD is updated to point to the specific branch reference.
+		7. When we checkout a particular commit, HEAD points at that commit rather than at the branch pointer.
+		Detached HEAD
+			You have a couple of options:
+				1. Stay in detached HEAD to examine the contents of the old commit. Poke around, view the files, etc.
+				2. Leave and go back to wherever you were before reattach the HEAD.
+				3. Create a new branch and switch to it. You can now make and save changes, since HEAD is no longer detached.
+		8. If you checkout an old commit and decide you want to return to where you were before
+			Then simply switch back to whatever branch you were on before(eg: master) $git switch branch-name
+		9. $git checkout supports odd syntax for referencing previous commits relative to a particular commit.
+				- HEAD~1 referes to the commit before HEAD(parent)
+				- HEAD~2 referes to 2 commits before HEAD(grandparent)
+		10. Discarding Changes
+			- To revert the file back to whatever it looked like when you last commited use:
+				- git checkout HEAD <filename> or $git checkout -- <filename1> [<filename2>...]
+					- discards any changes in that file, reverting back to the HEAD
+		Note: $ ls .git/refs/heads/ -> contains all the branches
+	
+	- Restore
+		- $git restore <file-name>
+			- helps undoing operations.
+			- To restore the file to the contents in the HEAD we use this command
+			- The above command is not "undoable" if you have uncommited changes in the file, they will be lost.
+			- This command restores using HEAD as the default source
+		- $git restore --source HEAD~1 <filename>
+			- Restore the contents of <filename> to its state from the commit prior to HEAD. (We can use particular commit hash as the source)
+		- Unstaging files with Restore
+			- If you have accidentally added a file to your staging area with git add and you don't wish to include it in the next commit, you can use git restore to remove it from staging.
+				- $git restore --staged <filename>
+				
+	- Git Reset
+		- Suppose you've just made a couple of commits on the master branch but you actually meant to make them on a separate branch instead. To undo those commits you can use git reset.
+			$git reset <commit-hash>
+				- reset repo back to a specific commit. The commits are gone.
+			$git reset --hard <commit>
+				- If you want to undo both the commits AND the actual changes in your files, you can use the --hard option.
+					Eg: git reset --hard HEAD~1 : delete the last commit and associated changes.
+	
+	- Git Revert
+		- $git revert <commit-hash>
+			- similar to git reset in that they both undo changes, but they accomplish it in different ways.
+			- git reset actually moves the branch pointer backwards, eliminating commits.
+			- git revert instead creates a brand new commit which reverses/undos the changes from a commit. Because it results in a new commit, you will be prepared to enter a commit message.
+			 
+	- Which one to choose git reset or git revert?
+		- If you want to reverse some commits that other people already have on their machines, you should use revert.
+		- If you want to reverse commits,that you haven't shared with others, use reset and no one will ever know

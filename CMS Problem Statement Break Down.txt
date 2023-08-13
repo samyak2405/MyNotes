@@ -1,0 +1,135 @@
+Course Registration System
+
+Use case: Create a Course Registration System
+Goal in Context: As head of Information systems of Wylie college Replace the older mainframe technology based system with new client server system to develop Course registration system
+Preconditions: Don't change the existing course catalog, Keep it and maintain the same
+Successful End Condition:
+	1. Student will be able to register for course
+	2. Professor will be able to put grades.
+	3. Students will be able to get grades.
+	
+Primary Actors:
+	1. Student
+	2. Professor
+	3. Administrator: Notification
+	
+Secondary Actors:
+	1. DB Admin
+	2. Billing system manager
+	3. Security manager
+	
+Trigger:
+
+Main Flow:
+	
+Student
+	1. Login/Register student
+	2. Course Registration
+		1. Billing system: Opens after successful registration of course
+		2. Notification system: If a course fills up during registration process, The student must recieve notification of the change before submitting the schedule for processing.
+		3. Constraints
+			- Allowed to Select 4(Complusory)+2(Alternatives in case primary courses are not alloted) courses
+			- Each course can have n students where 3<=n<=10
+			- Course with n<3 is cancelled
+			//- Each sem for t (where t is time period) student can change their schedule
+				Add course
+				Drop course
+	3. View Report card At the end of semester 
+	4. View Course Catalog
+	
+Professor
+	1. Login/Register Professor
+	2. Record grades 
+	3. Publish which course they will be teaching 
+	4. View students registered for course 
+	
+/*Admin(Registrar office)
+	1. Provide signup access to professor(Authenticate and Authorize Professor)
+	2. Authenticate and authorize the student to view grade card. 
+*/	
+	
+DB Admin
+	1. Maintain the course Info 
+		Course Info
+			1. Professor
+			2. department
+			3. Prerequisites
+	2. Access the course info but not update it
+	
+Case
+	1. Beginning of each Sem
+		1. Student request to admin for couse catalogue containing a list of course offered in this sem
+		
+		
+		- All Use Case Diagram must be separated.
+    - Student
+    - Professor
+    - Admin/Registrar
+
+- The course information will come from the course catalog
+- CMS removal
+-
+
+ 
+
+Student Registers -> Approved by the Admin/Registrar
+Approval k baad , the student are able to add course
+
+ 
+
+Separate use case for Add course (and Drop course).
+
+ 
+
+PayBill Students ----> Pay Fee ===-=> Billing System
+How ?    ---- Online
+                ----- UPI
+                ----- Net Banking
+                ----- Credit/Debit Cards
+
+
+        ----- Offline
+                ----- Deposit Cash
+
+View Report Card-> View Grade
+
+ 
+
+Professor:
+
+ 
+
+-- Admin/Registrar assigns professor to the course.
+- Professor can upload the grade.
+- Professor can see the enrolled students list.
+
+ 
+
+ 
+
+Admin:
+- Approve student registration
+- Add Professor (not Add Student)
+- Add Admin
+- Generate Report Cards
+- Course Catalog Add/Drop Catalog
+
+ 
+
+FREEZE Requirements!
+- Get Approval from the Customer.
+
+
+Assignment 1:
+	Create the Activity diagram based on the use case
+		1. Professor Activity Diagram
+		2. Professor Activity Diagram
+		3. Admin Activity Diagram
+	
+Assignment 2:
+	In the existing repo of the git(wibmo_microservice_project_repo)
+		1. CRS-{GROUPNAME}-UML-ARTIFACT_PROJECT
+			1. Use case diagram
+			2. Activity diagram
+			3. Class diagram
+			4. Sequence diagram

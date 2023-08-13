@@ -1,0 +1,394 @@
+Codes:
+	01. DemoRunnable_1.java
+	02. DemoThreadClass_2.java
+	03. DemoJoinMethod.java
+	04. DemoThreadPriority.java
+	05. DemoDaemonThread_3.java
+	06. DemoSynchronization.java using synchronized keyword.
+	07. DemoSynchronization1.java : Problem that occurs in intrinsic lock.
+	08. DemoSynchronizationBlock.java
+	09. DemoCustomLock.java
+	10. DemoWaitNotify.java 
+	11. ProducerConsumer.java
+	12. DemoReentrantLock.java
+	13. ProConUsingReentrant.java -> Producer consumer problem using reentrant lock. 
+	14. DemoVolatile.java
+	15. DemoDeadlock.java
+	16. DemoLivelock.java
+	17. DemoAtomicInteger.java
+	18. DemoSemaphores.java
+	19.	SingleThreadExecutor.java
+	20. FixedThreadPool.java
+	21. ScheduledThreadPool.java
+	22. CallableFuture.java
+	23. DemoCollectionSynch.java
+	24.
+	25.
+
+1. By default programming languages are sequential which means they execute the command one by one on a line by line basis. This is a single threaded application.
+	Disadv: Time consuming operation may freeze the entire application.
+2. Multithreading is the ability of the CPU to execute multiple processes or threads concurrently.
+3. Both thread and Processes are independent sequences of execution.
+4. Process: Instance of program execution. Eg. When you open a s/w(Paint, Excel, etc) or Web Browser, etc these are distinct processes.
+5. Thread: A thread is essentially a light weight process.
+	A thread is a unit of execution within a given process, so a single process may contain several threads.
+	Each thread in a process shares the memory and resources and this is why programmers have to deal with concurrent programming.
+	
+Time-Slicing Alogrithm(similar to Round Robin Scheduling of threads on a single CPU)
+
+Let's assume that we have multiple threads(k threads) in our application
+	A single CPU has to deal with all the k threads in the application - we can use Time-slicing alogrithm
+	Processing Time for a single processor is shared among multiple processes or threads.
+
+When there are multiple processors or cores then all the threads can be executed in a parallel manner. This is parallelization.
+
+Adv of Multithreading
+	1. We can design more responsive application - we can do several operations concurrently.
+	2. Better resource utilization(CPU Utilization). 
+	3. Improve performance.
+	
+Disadv of Multithreading
+	1. Threads are manipulating data that are located on the same memory area because they belong to the same process synchronization is not that straight forward.
+	2. Not easy to design and test.
+	3. Using multiple threads is expensive. 
+	4. For small problems and applications it is unncessary to use multiple threads.
+
+Thread lifecycle
+Four states in lifecycle
+	1. New: Every thread is in the new state until we call the start() method
+	2. Active: When we call the start() method on the given thread. There are two substates- runnable and running
+	3. Blocked/Waiting : When we call the join() method or when a thread is waiting for another thread to finish. No CPU CYCLES
+	4. Terminated: When a thread has finished it's task
+
+Java executes program on line by line basis
+
+We can implement thread using
+	1. By implementing Runnable interface
+	2. By extending Thread class
+	Note: The Runnable interface approach is preferred.
+		1. If we extend thread then we can't extend any other class(usually a huge disadvantage) because in Java a given class can extends one class exclusively
+		2. A class may implement more interfaces as well - so implementing the runnable interface can do no harm in the software logic.
+
+We can create a thread using Thread class
+
+Whatever code is written inside run() method is implemented by thread.
+
+Sleep(long millis) method: Causes the currently executing thread to sleep by ceasing execution temporarily by some milli seconds.
+
+t1.join(): Java will wait for thread to finish before executing other parts of the application. (DemoWaitMethod.java)
+
+When Java program starts then one thread begins running immediately(main thread) - it starts the main method
+We can create child thread from the main thread.
+The main thread is the last thread to finish execution because it performs various shutdown operations.
+
+Worker Thread(User thread)
+	Performs actual task and computations in a multithreaded application.
+	when program starts, main is the first worker thread created by default.
+	We can create multiple worker thread to perform parallel processing and execute different tasks concurrently
+	Worker threads are user threads and prevent the JVM from terminating as long as they are active(Still executing).
+	
+
+Daemon Thread: 
+	Runs in the background and provides supporting services to other threads.
+	Performs task such as Garbage collection, Resource management or monitoring without preventing JVM to shutting down.
+	Unlike worker threads, daemon threads do not prevent the JVM from exiting if all other non-daemon threads have completed their tasks.
+	Main is a non daemon thread.
+	
+	Intended as helper threads(Eg: Garbage collection)
+	Used for I/O Operations or services(Smartphone services such as NFC or Bluetooth communication)
+	Daemon threads are terminated by the jvm when all other worker threads are terminated.
+	Worker threads are not terminated while daemon threads are interrupted by the JVM.
+
+When we run a Java application then JVM is going to create a main thread and several daemon threads(For ex: for garbage collection)
+In Main thread we can create as many worker threads as we want.(Child threads of the main thread)
+
+To get the name of the thread currently running: String thread = Thread.currentThread().getName();
+
+Thread Priority
+	The CPU can execute the threads one by one.
+	The Thread scheduler decides what thread will be executed by the CPU
+	We can assign a priority value(1-10) to every thread. 1->MIN_PRIORITY, 10->MAX_PRIORITY
+	Threads with the same priority value(default priority is 5) are executed in a FCFS manner- thread scheduler store the threads in a queue.
+	Higher priority threads are executed before lower priority threads but it depends on the underlying OS(thread starvation is avoided)
+	To set priority of thread
+		Thread.currentThread().setPriority(Priority_Value);
+		if Priority_Value becomes greater than 10 then program throws IllegalArgumentException.
+		
+Memory Management
+	Threads of the same process run in a shared memory space
+	Proccesses run in separate memory spaces.
+	Stack Memory: The local variables and method arguments as well as method calls are stored on the stack.(Fast compared to heap memory)
+	Heap Memory: Objects are stored on the heap memory and live as long as it is referenced from somewhere in the application.(Slower compared to stack memory)
+	Every thread has its own stack memory but all threads share the heap memory(Shared memory space)
+	
+Synchronization
+	Purpose of synchronization is the sharing of resources without interference using mutual exculsion. We need synchronization because every thread shares main memory(heap memory).
+	We should use synchronization whenever two or more threads try to access the same resource simultaneously.
+		 
+	1. Using synchronized keyword
+		public static synchronized void increment(){
+        counter++;
+       }
+	   Intrinsic Lock(Monitor)
+		- Every object in Java has a so called intrinsic lock
+		- A thread that needs exclusive and consistent access to an object's fields has to acquire the object's intrinsic lock before accessing them,
+			and then release the intrinsic lock when it's done with them.
+		- Because of the monitor lock: no 2 threads can execute the same synchronized method at the same time.
+		- A thread owns the intrinsic lock between the time it has acquired the lock and released the lock.
+		- As long as a thread owns an intrinsic lock no other thread can acquire the same lock
+		- Note: When a thread acquires a lock using synchronized method then it acquires lock on entire class.
+		- The other thread will block when it attempts to acquire the lock.
+		- Problem
+			- Every Object has a single monitor lock
+			- If we have 2 independent synchronized methods than the threads have to wait for each other to release the lock.
+		- Object-level locking and Class-level locking 
+			-  Class level locking: We get the monitor lock(intrinsic lock) associated with the class
+				Eg: 1.
+				public static synchronized void increment(){
+					counter++;
+				}
+				2.
+				public static void increment(){
+					synchronized(Class_name.class){
+						counter++;
+					}
+				}
+				
+			- Object level locking: We get the monitor lock(intrinsic lock) associated with the object itself.
+				Eg:
+				1. 
+					public synchronized void increment(){
+						counter++;
+					}
+				2.
+					public void increment(){
+						synchronized(this){  //synchronized block
+							counter++;
+						}
+					}
+			- Note: Usually it is not a good practice to use synchronized keyword in method. Instead use synchronized block.
+			- Rule of thumb: We synchronized blocks that are 100% necessary.
+	
+	2. Locking with custom Object: See the code
+		- At the same time does not mean parallel execution it means CPU will use time slicing alogrithm to schedule the threads.
+		- There is a single intrinsic lock associated with every object or class in java
+		- A given thread that needs exclusive and consistent access to an object's fields has to acquire the object's
+			intrinsic lock before accessing them
+		- And then the thread releases the intrinsic lock when it's done with them.
+		- With locks: the acquired lock can be released any thread.
+		- RLocks can be released by the thread that acquired it exclusively.
+		- Thread cannot acquire a lock owned by another thread.
+		- A given thread can acquire a lock that it already owns.
+		- Allowing a thread to acquire the same lock more than once is called re-entrant synchronization.
+		- let's consider recursive method calls. If a given thread calls a recursive and synchronized method 
+		  several times then it is fine (note that in this case the same thread "enters" the synchronized block several times).
+		  There will be no deadlock because of re-entrant synchronization.
+	
+	3. Thread Communication
+		- Threads that are locking on the same intrinsic lock(monitor) can release the lock until the other thread calls notify.
+		- wait() and notify() methods can be used and called from synchronized methods or blocks exclusively.
+		- wait() means that it is going to release the lock until the other thread cause notified. Hence the thread that calls wait() goes in waiting state.
+		- The other thread can acquire the intrinsic lock which means that it can execute the synchronized method or synchronized block
+		- If the other thread causes notify, it means that the first thread that is in a waiting state can continue with the operations.
+		- hence with the help of wait and notify we can release and reacquire the intrinsic lock.
+		-
+		
+		- Difference between wait() and sleep()
+			- You call wait on Object while on the other hand you call sleep on Thread itself.
+			- wait can be interrupter(this is why we need the InterruptedException) while on the other hand sleep cannot.
+			- wait(and notify) must happen in a synchronized block on the monitor object whereas sleep does not.
+			- sleep operation does not release the locks it holds while on the other hand wait releases the lock on the object that wait() is called on.
+	
+	4. ReentrantLock(Lock and condition)
+		- It has the same behavior as the synchronized approach
+		- It has some additional features.
+			new ReentrantLock(boolean fairness)
+				- If the fairness parameter is true then longest waiting thread will get the lock
+				- If fairness is false then there is no access order.
+		- Imp: A good approach is to try-catch-finally blocks. When doing the critical section and call unlock() in the finally block.
+		- Eg:
+				private static void increment(){
+					lock.lock();
+					try {
+						for(int i = 0;i<10000000;i++)
+						counter++;
+					} finally{
+						lock.unlock();
+					}
+				}
+		- await(): handle the execution to the other thread 
+		- signal(): notify the first thread and wake it up Code: ProConUsingReentrant.java
+		
+		Locks and Sychronized Blocks
+			- A reentrant lock has the same basic behavior as we have seen for synchronized blocks(With some extended features)
+			- We can make a lock fair: prevent thread starvation. Synchronized blocks are unfair by default.
+			- We can check whether the given lock is held or not with reentrant locks.
+			- We can get the list of threads waiting for the given lock with reentrant locks.
+			- Sychronized blocks re nicer: we do not need the try-catch-finally block.
+		
+		Note: doubt in lect 17 and 20.
+		
+Multithreading Concepts
+	1. Volatile Keyword
+		- Every thread has its own Stack memory, CPU and cache.
+		- CPU Stores variable in cache because it is faster to access variable from cache than main memory.
+		- Every read of a volatile variable will be read from RAM so from the main memory(and not from cache)
+		- usuallly variables are cached for performance reasons.
+		- Caches are faster. Do not use volatile keyword if not necessary(it prevents instruction reordering which is a performance boost technique)
+		- Ensure that changes made to the variable are immediately visible to other threads.
+		- Prevent from problems that can arise due to thread-local caching and optimizations performed by modern processors.
+		- Caching can lead to situations where changes made to a variable by one thread are not immediately visible to other threads, causing inconsistency and unexpected behavior
+		- Addresses this by instructing compiler to store the variables in memory, bypassing the thread-local cache
+		- Any write to volatile variable is immediately visible to all threads
+		- Used for variables that act as flags, status indicators or signals between threads.
+		- DemoVolatile.java is also an example of how to stop a thread from running as thread.stop() method is unsafe and deprecated.
+	
+	2. Deadlock and Livelock
+		1. Deadlock
+			- Deadlock occurs when two or more threads wait forever for a lock or resource held by another of the threads.
+			- Deadlock is a situation in which two or more competing actions are each waiting for the other to finish, and thus neither ever does 
+				1. Deadlock in Database:
+					1. Deadlock happens when two processes each within its own transaction updates two rows of information but in the opposite order.
+					For Eg: Process A updates row 1 then row2 in the exact timeframe that Process B updates row 2 then row 1
+				2. Deadlock in OS:
+					Deadlock is a situation which occurs when a process or thread enters a waiting state because a resource requested is being held by another waiting process, which in turn is waiting for another resource held by another waiting process.
+		2. Livelock
+			- Situation that occur where two or more threads are stuck in a never ending loop each waiting for other to release the resource or take some action.
+			- Threads are active unlike deadlock(where threads are blocked and cannot proceed) and continuously changing their state but the overall system is not making any progress.
+		Thread should not infinitely if it is unable to acquire a lock
+			hence use Lock interface's tryLock() method
+		Make sure that each thread acquires the locks in the same order to avoid any cyclic dependency in lock acquisition
+		Livelock can be handled with the methods above and some randomness
+			Threads retry acquiring the locks at random intervals.
+		
+		Lambda Expression to create a Threads
+			Deadlock deadlock = new Deadlock();
+			new Thread(deadlock::worker1,"worker1").start();
+	
+	3. Atomic Variable
+		- Referred as Atomic types or Atomic classes are classes that provide atomic operations on single variables.
+		- Guaranteed to be executed in an atomic manner, meaning that they are indivisible and not subject to interference from other threads.
+		- Atmoic operations on these variables are thread-safe and do not require additional synchronization mechanisms like locks.
+		- Some Atomic classes
+			- AtmoicInteger
+			- AtomicLong
+			- AtmoicBoolean
+			- AtomicReference
+		Features
+			1. Atomic Operations: Perform operations atomically, without the need for explicit locking.
+			2. Thread safety: Multiple threads can concurrently access and modify atomic variables without causing data races or synchronization issues.
+			3. Memory Visibility: Changes made by one thread to an atomic variable are immediately visible to other threads.
+			4. Performance
+	
+	NOTE: Ownership is the simple concept that when a task locks(acquire) a mutex only it can unlock(release it).
+	
+	4. Semaphores(Invented by Dijkstra 1962)
+		- Semaphores are simple variables(or abstract data types) that are used for controlling access to a common resource.
+		- It is an important concept in OS as well
+		- It is a record of how many units of a particular resource are available. We have to wait until a unit of the resource becomes available again.
+		- Counting Semaphores: Allows an arbitrary resource count.
+		- Binary Semaphores: Semaphores that are restricted to the values 0 and 1
+			1. Semaphores tracks only how many resources are free - it does not keep track of which of the resources are free.
+			2. The Semaphores count may serve as a useful trigger for a number of different actions(web servers)
+			3. Producer-consumer problem can be solved ad implemented with the help of semaphores(Dijkstra's approach)
+		- It is used to control access to a shared resource that uses a counter variable
+		- Semaphore maintains a set of permits
+			- acquire() ... If a permit is available then takes it
+			- release() ... adds a permit
+			- Semaphore just keeps a count of the number of permits available new Semaphore(int permits,boolean fair)
+		
+		
+	5. Mutexes(Mutual Exclusion Objects)
+		- Mutual Exclusion is a property of concurrency control which is instituted for the purpose of preventing race conditions.
+		- Process synchronization plays an important role in maintaining the consistency of shared data(critical section problem)
+		- Mutex is very similar to a binary semaphore: while binary semaphore can be used as mutex, a mutex is a more specific use-case
+		- A lock is designed to enforce a mutual exclusion concurrency control policy.
+		
+		Semaphores vs Mutex
+		Semaphores
+			- Used to control access to a resource with limited capacity.
+			- It is a signalling mechanism
+			- Threads and processes perform wait() and notify operations to indicate whether they are acquiring or releasing the resouce
+			- Semaphore allows multiple program threads to access the finite instance of resources(not just a single resource)
+			- The process or thread blocks itself if no resource is free till the count of semaphore become greater than 0
+			
+		Mutex
+			- Primarly Used for Mutual exclusion
+			- Mutex is a locking mechanism
+			- Threads or processes have to acquire the lock on mutex object if it wants to acquire the resource.
+			- Mutex allows multiple program threads to access a single shared resource but one at a time
+			- If the lock is already acquired by another thread or process then the thread will wait until the mutex object gets unlocked.
+			- A mutex can be owned by at most one thread at any given time while on the other hand binary semaphore has no concept of ownership
+			- If a task tries to unlock a mutex it hasn't locked(thus doesn't own) then an error condition is encountered and most importantly the mutex is not unlocked. If the mutual exclusion object doesn't have ownership then, irrelevant of what it is called, it is not a mutex.
+
+Creating Threads with Executors
+	Executors
+		- Java provides its own multithreading framework the so-called Executor Framework.
+			- We can manage worker threads more efficiently because of thread pools.
+			- Using Thread pools makes multithreading efficient.
+		- Why to use thread pools and Executor framework?
+			- It will handle everything: schedule and execute the submitted tasks.
+			- Creating and managing threads is expensive
+			- Adding a new thread for each process leads to the creation of a large number of threads.
+			- These threads need memory+CPU will spend too much time switching context when the threads are swapped.
+			- Using thread pools makes multithreading efficient
+			- Thread pools can resuse threads in an extremely efficient manner by keeping the threads alive and reusing them(thread pools are usually queues)
+		Types
+			1. SingleThreadExecutor
+				This executor has a single thread so we can execute processes in a sequential manner. Every process is executed by a new thread.
+			2. FixedThreadPool(n)
+				This is how we can create a thread pool with n threads. Usually n is the number of cores in the CPU
+				If there are more tasks than n then these tasks are stored with a LinkedBlockingQueue data structure.
+			3. CachedThreadPool
+				The number of threads is not bounded: If all the threads are busy executing some tasks and a new task comes the pool will create and add a new thread to the executor.
+				If a thread remains idle for 60 secs then it is removed.
+				It is used for short parallel tasks.
+			4. ScheduledExecutor
+				We can execute a given operation at regular intervals or we can use this executor if we wish to delay a certain task.
+			
+	Runnable and Callable Interfaces
+		1. Runnable and Callable both run on a different threads than the calling thread but Callable can return a value and Runnable cannot.
+		2. Runnable
+			- A so-called run-and-forget action.
+			- We execute a given operation in the run() method without a return value
+		3. Callable<T>
+			- We use Callable interface's call() method if we want to return a given value from the given thread
+			- Callable interface will not return the value: this is why we need Future<T> object
+			- Calling thread will be blocked till the call() method is executed and Future<T> returns with the results.
+		4. The ExecutorService can handle both of the interfaces(Runnable and Callable interfaces)
+			executorService.execute() -> This method executes a Runnable interface so it means there is no return value(void run() method)
+			executorService.submit() -> This method can handle Runnable Interfaces as well as Callable Interfaces
+				-> It can handle a Future<T> return value and we can get the T value with get() on the future object.
+				
+Concurrent Collection(Framework is a set of classes and interfaces that implements commonly resuable collection data structures.)
+	1. Iterable Interface
+		a) Collection Interface
+			i. List Interface
+				1. ArrayList class
+				2. LinkedList class
+				3. Vector class (Thread safe)
+					a) Stack class (Thread safe)
+			ii. Queue Interface
+				1. PriorityQueue class
+				2. Deque interface
+					a) ArrayDeque class 
+			iii. Set interface
+				1. HashSet class
+				2. LinkedHashSet class
+				2. SortedSet interface
+					a) TreeSet class
+		b) Map Interface (Thread safe)
+			1. HashTable class (Thread-safe,But not synchronized in best way possible)
+			2. HashMap class
+			3. LinkedHashMap class
+			4. SortedMap Interface
+				a. TreeMap
+		
+		- Most of these data structure are not thread-safe.
+		- If we want to use this Data structure in multithreading environment then it may lead to inconsistent state.
+
+	Collection Synchronization
+		
+			
+		
+			
