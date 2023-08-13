@@ -225,4 +225,7 @@
 18. Github
 	- hosting platform on cloud for git repos.
 	- git is a VCS that runs locally on your m/c.
-	- 
+	1. Cloning
+		- to clone a remote repo hosted on github we use following command	
+			$git clone <url>
+			
