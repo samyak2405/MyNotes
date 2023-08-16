@@ -225,7 +225,74 @@
 18. Github
 	- hosting platform on cloud for git repos.
 	- git is a VCS that runs locally on your m/c.
+	
 	1. Cloning
 		- to clone a remote repo hosted on github we use following command	
 			$git clone <url>
+	
+	2. SSH Keys
+		- You need to be authenticated on Githuv to do certain operations, like pushing up code from your local machine.
+		- Your terminal will prompt you every single time for your Github email and password, unless...you generate and configure an SSH key
+		- Once configured you can connect to Github without having to supply your username/password.
+	
+	3. Creating Github Repository
+		- Option 1: Existing Repository
+			If you already have an existing repo locally that you want to get on Github.
+				1. Create a new repo on github.
+				2. Connect your local repo (add a remote)
+				3. Push up your changes to Github.
+		- Option 2: Start from Scratch
+			If you haven't begun work on your local repo, you can...
+				1. Create a brand new repo on Github.
+				2. Clone it down to your machine 
+				3. Do some work locally.
+				4. Push up your changes to Github.
+	
+	4. 	Remote
+		- Before we can push anything up to Github, we need to tell Git about our remote repository on Github.
+		- We need to setup a "destination" to push up to.
+		- In Git, we refer to these destination as remotes. Each remote is simply a URL where a hosted repository lives.
+		- Viewing Remotes
+			- To view any existing remotes for you repository, we can run "$git remote" or "$git remote -v"(verbose, for more info)
+			- This just displays a list of remotes.
+			- If you haven't added any remotes yet, you won't see anything.
+		- Adding a new Remote
+			- A remote is really two things: a URL and a label.
+			- To add a new remote, we need to provide both to git.
+			- $git remote add <name> <url>
+			- Ex: $git remote origin https://github.com/blah/repo.git
+			- Origin is a conventional Git remote name, but it is not at all special. It's just a name for a URL.
+			- When we clone a Github repo, the default remote name setup for us is called origin. You can change it.
+	 	- Renaming remote
+			- $git remote rename <old> <new>
+		- Removing remote
+			- $git remote remove <name>
+	
+	5 Push
+		- Now that we have a remote set up, let's push some work on Github.
+		- To do this we use following command
+			$git push <remote> <branch>
+		- We need to specify the remote we want to push up to AND the specific local branch we want to push up to that remote.
+		- Ex: $git push origin master
+		- While we often want to push a local branch up to a remote branch of the same name, we don't have to
+		- To push our local branch up to a remote branch we can do it using following command
+			$git push <remote> <local-branch>:<remote-branch>
+		- Push an existing repository from the command line
+			$git remote add origin <url>
+			$git branch -M main (Rename master branch to main)
+			$git push -u origin main
+		- The -u option
+			- The option allows us to set the upstram of the branch we're pushing, You can think of this as a link connecting our local branch to a branch on Github.
+			- Running $git push -u origin master sets the upstream of the local master branch so that it tracks the master branch on the origin repo.
+
+	7 Fetching & Pulling
+		- Remote tracking Branches
+			- At the time you last communicated with this remote repository, here is where x branch was pointing.
+			- it's a reference to the state of the master branch on the remote. I can't move this myself.
+			- It's like a bookmark pointing to the last known commit on the master branch on origin.
+			- They follow this pattern <remote>/<branch>
+				- origin/master references the state of the master branch on the remote repo named origin.
+				- upstram/logoRedesign references the state of the logoRedesign branch on the remote named upstream (a common remote name)
+		- Checking out remote tracking branch
+			
 			
