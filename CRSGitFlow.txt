@@ -1,0 +1,21 @@
+1. Create a new Project Directory
+2. Create a repository(Don't add Readme)
+3. echo "# <Project-directory-name>" >> README.md
+4. git init
+5. git commit -m msg
+6. git remote add origin <url>
+7. git push -u origin master
+8. Update the repository
+	$git add .
+	$git commit -m "Second commit"
+	$git push
+9. Setup your team
+	Settings->Collaboratos->Seach for users->Add Collaborator
+10. If you are a collaborator
+	1. Go to github repo page
+	2. Git clone the project
+	3. cd into the directory
+11. Collaborating RULE: THE MASTER BRANCH SHOULD ALWAYS BE DEPLOYABLE
+	1. Create new branches for new features and merge them to master when they're completed
+	2. Branch should represent features.
+	3. 

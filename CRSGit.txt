@@ -1,0 +1,10 @@
+1. Clone the github repository
+	$git clone <url>
+
+2. Create a branch name professor-features
+
+3. Merge this branch to CRS-Development branch
+
+4. Solve the merge conflicts
+
+5. Once resolved commit these changes and repeat the same process for admin

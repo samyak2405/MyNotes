@@ -293,6 +293,51 @@
 			- They follow this pattern <remote>/<branch>
 				- origin/master references the state of the master branch on the remote repo named origin.
 				- upstram/logoRedesign references the state of the logoRedesign branch on the remote named upstream (a common remote name)
+				
 		- Checking out remote tracking branch
-			
+			- $git branch -r
+				Run the above command to view the remote branches our local repository knows about.
+			- $git checkout origin/master
+				Note: switching to 'origin/master'. You are in 'detached HEAD' state.
+				You can look around, make experimental changes and commit them, and you can discard any commits
+				you make.
+		- Working with Remote branches
+			- Remote Branches
+				1. Switching to a remote Branch
+					$git switch <remote-branch-name>
+						- To create a new local branch from the remote branch of the same name.
+						- It makes a local <remote-branch-name> AND sets it up to track the remote branch origin/<branch-name>
+		- Fetching
+			- Fetching allows us to download changes from a remote repository, but those changes will not be automatically integrated into our working files.
+			- It lets you see what others have been working on, without having to merge those changes into your local repo
+			- Think of it as "Please go and get the latest information from Github, but don't screw up my working directory"
+			- $git fetch <remote> 
+				- This command fetches and history from a specific remote repository.
+				- It only updates remote tracking branches.
+				- $git fetch origin would fetch all changes from the origin remote repository.
+			- $git fetch <remote> <branch>
+				- we can also fetch a specific branch from a remote using above command
+		
+		- Pulling
+			- git pull is another command we can use to retrieve changes from a remote repository.
+			- Unlike fetch, pull actually updates our HEAD branch with whatever changes are retrieved from the remote.
+			- "Go and download data from github and immediately update my local repo with those changes"
+			- git pull = git fetch(Update the remote tracking branch with the latest changes from the remote repository) + git merge(Update my current branch with whatever changes are on the remote tracking branch)
+			- $git pull <remote> <branch>
+				- To pull, we specify the particular remote and branch we want to pull using git pull <remote> <branch>.
+				- Just like with git merge, it matters WHERE we run this command from.
+				- Whatever branch we run it from is where the changes will be merged into.
+				- git pull origin master would fetch latest information from the origin's master branch and merge those changes into our current branch.
+				- pull can result into merge conflicts.
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 			
