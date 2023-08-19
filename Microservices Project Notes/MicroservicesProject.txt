@@ -1,0 +1,9 @@
+Spring Boot Microservices
+1. Product Service: Create and View Products, acts as Product Catalog
+2. Order Service: Can Order Products
+3. Inventory Service: Can check if product is in stock or not
+4. Notification Service: can send notifications after order is placed
+
+- Order Service, Inventory Service and Notification Service are going to interact with each other.
+- Synchronous and Asynchronous Communication
+

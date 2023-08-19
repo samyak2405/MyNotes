@@ -2,3 +2,65 @@ w3.org creates all web standards
 Web 1.0
 Web 2.0
 web 3.0
+
+
+Logger
+	For best practices of debugging and consoling the application, we use loggers
+	There are two types of loggers
+		1. Java Internal Logger(java.utils.logger)
+		2. Apache Logger(log4j)---> POS/ slf4j ---> Spring
+	
+	Steps:
+		1. Add the reference library 
+			Download: https://www.apache.org/dyn/closer.cgi/logging/log4j/1.2.17/log4j-1.2.17.zip
+			Add the jar file in classpath of project
+		2. create log4j.properties file
+		3. Add global logging configuration
+		4. Plug logger in Class
+			private static Logger logger = Logger.getLogger(Classname.class);
+	
+	INFO: To get the information (logger.info)
+	DEBUG: Replace sysout debug statements (logger.debug)
+	ERROR: Catch Handled Exceptions (logger.error)
+
+Assignment: Remove all the syso and plug logger with all the relevant methods like info, debug and Error
+
+JUnit
+	Unit Testing --> Developer responsibility
+	Existing Practice: 
+		.net testing: NUnit
+		java testing: JUnit
+
+There are two Types of JUnits: 4x and 5x. We prefer 4x.
+	The Official website of JUnit is: https://junit.org/junit4/
+	
+The Junit 4.x framework is annotation based, so let's see the annotations that can be used while writing the test cases.
+
+@Test annotation specifies that method is the test method.
+
+@Test(timeout=1000) annotation specifies that method will be failed if it takes longer than 1000 milliseconds (1 second).
+
+@BeforeClass annotation specifies that method will be invoked only once, before starting all the tests.
+
+@Before annotation specifies that method will be invoked before each test.
+
+@After annotation specifies that method will be invoked after each test.
+
+@AfterClass annotation specifies that method will be invoked only once, after finishing all the tests.
+
+There are various assert methods which are used for actual and expected results.
+Methods of Assert class
+The common methods of Assert class are as follows:
+
+	void assertEquals(boolean expected,boolean actual): checks that two primitives/objects are equal. It is overloaded.
+	void assertTrue(boolean condition): checks that a condition is true.
+	void assertFalse(boolean condition): checks that a condition is false.
+	void assertNull(Object obj): checks that object is null.
+	void assertNotNull(Object obj): checks that object is not null.
+	
+Assignment: Create the test cases for all the business servies
+1. Auth service
+2. Student service
+3. Admin Service
+4. Professor Service
+5. DAO Service
