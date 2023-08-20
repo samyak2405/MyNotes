@@ -18,4 +18,3 @@
 11. Collaborating RULE: THE MASTER BRANCH SHOULD ALWAYS BE DEPLOYABLE
 	1. Create new branches for new features and merge them to master when they're completed
 	2. Branch should represent features.
-	3. 
