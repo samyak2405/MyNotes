@@ -1,0 +1,71 @@
+1. Domain Name Server(DNS)
+	- hierarchical and distributed system used to translate human-readable domain names(www.example.com)
+	  into IP addresses like 192.168.1.1
+	- IP addresses are used to identify each other on the internet or a private n/w.
+2. Load Balancer
+	- N/w device that distributes incoming network traffic across multiple backend servers or services to
+	  improve the performance and availability of the system.
+	- sits between the client and server and uses various algorithms to distribute incoming requests among
+	  the available servers in a manner that maximizes performance and ensures that no single server is 
+	  overwhelmed.
+3. API Gateway
+	- Server that acts as a single point of entry for a set of microservices.
+	- Receives client requests, forwards them to the appropriate microservice, and returns server's response to 
+	  the client.
+	- Responsible for tasks such as routing, authentication and rate limiting.
+4. CDN
+	- A distributed n/w of servers that are deployed in multiple locations around the world.
+	- These servers are designed to deliver web content such as images, videos and other static files to users based on their 
+	  geographical location.
+	- Main purpose is to improve the performance and availability of web content by caching it on servers that are closer to the users
+	  who are requesting it.
+5. Forward Proxy vs Reverse Proxy
+	- Forward Proxy: Server that sits in front of one or more client m/cs and acts as an intermediary between the clients and the internet.
+					 When client request for a resource on internet the request first goes to the forward proxy.
+					 Forward proxy then forwards the request to the internet on behalf of the client m/c and returns response to the client m/c.
+	- Reverse Proxy: Server that sits in front of one or more web servers and acts as an intermediary between the web servers and the Internet.
+					 When a client makes a request to a resource on the internet, the request is first sent to the reverse proxy.
+					 Reverse proxy then forwards the request to one of the web servers, which returns the response to the reverse proxy.
+					 Reverse proxy then returns the response to the client.
+6. Caching
+	- High speed storage layer
+	- sits between the application and the original source of the data such as DB, File system or remote web service.
+	- If data is requested
+		If found in Cache
+			return data to the application
+		else
+			retrieve from its original source
+			store it in cache 
+			return data to the application
+	- Caching can be done at multiple places 
+		1. Client Cache
+			- Use case: Faster retrieval of content
+			- Solutions: Browser cache
+		2. DNS Cache
+			- Use case: Faster domain to IP resolution
+			- Solutions: Amazon Rout 53, Azure DNS, Google Cloud DNS
+		3. CDN Cache
+			- Use case: Faster retrieval of static content
+			- Solutions: Akamai, CloudFront, ElastiCache, Azure CDN
+		4. Web Server Cache
+			- Use case: Faster retrieval of web content.
+			- Solutions: CloudFront, ElastiCache
+		5. App Server Cache
+			- Use case: Accelerated application performance and data access
+			- Solutions: Local server cache, remote cache on redis, memcached, ElastiCache
+		6. Database cache
+			- Use case: Faster access to data stored
+			- Solutions: Local DB cache, Remote cache on Redis, Memcached, ElastiCache, etc.
+7. Data Partitioning
+	Horizontal Partitioning:(Sharding) Dividing rows of a table into smaller tables and storing them on different
+							servers or database instances.
+							- distributes the load of a database across multiple servers and to improve performance.
+	Vertical Partitioning: Dividing the columns of a table into separate tables.
+						   Reduces the number of columns in a table and to improve the performance of queries that only access a small
+						   number of columns.
+8. Sharding
+	- Technique used to scale a database by horizontal partitioning
+	- distribute the data and workload across multiple servers, so that each server can handle a smaller portion of the overall data and workload.
+	- Improve performance and scalability of DB as each server can process queries and updates more efficiently when it is working with smaller amount of data.
+	- Range-based sharding
+		- Data is partitioned based on a key value, such as a userID or a timestamp

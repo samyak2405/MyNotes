@@ -1,0 +1,54 @@
+Spring Boot
+
+1. Spring is a Java Framework which  provides most of the Enterprise solutions based on B2B and B2C.
+2. Spring is Framework based on DI(Dependency Injection) in which we can inject the dependencies using
+	- Constructor injection
+	- setter injection 
+	- autowire.
+3. We will completely replace new keyword with DI.
+4. Spring provides various kinds of implementation with various libraries using Springboot.
+5. In the web development, Spring provides: Spring MVC including Spring REST.
+6. In the Spring REST implementation, we basically use various annotations.
+	- @SpringBootApplication: Entry point of Spring Application
+	- @EnableAutoConfiguration
+	- @Configuration
+	- @EnableWebMVC
+	- @Components
+	- @Service
+	- @Repository
+	- @ComponentScan
+	- @Autowired
+	- @GetMapping --> This is for GET Method(Read)
+	- @PostMapping --> This is for POST Method(Create)
+	- @PutMapping --> This is for PUT Method(Update)
+	- @DeleteMapping --> This is for Delete Method(Delete)
+7. Ref: https://spring.io/guides/tutorials/rest/
+	https://spring.io/why-spring
+	https://medium.com/nerd-for-tech/building-a-simple-restful-api-with-spring-boot-2351687ecab0
+8. For making the SpringBoot application we use 2 important tools for the dependency managements.
+	1. MAVEN: Preferred
+	2. GRADLE
+
+9. Project Structure of Spring
+	1. src/main/java
+		In this folder structure,
+	2. src/main/resources
+		In this folder, we place all the properties file and static resources.
+	3. src/test/java
+		In this folder, we need to place all the test cases.
+	4. JRE System Library:
+		In this folder structure, all the Java dependencies are there.
+	5. Maven Dependencies:
+		In this folder, all the respective maven spring dependencies are there based on pom.xml
+		pom.xml(This is a project object model file)
+	
+10. JPA
+	Evolution of Data Persistence mechanism in Java.
+	JDBC(Java Database Connectivity)--> JDBCTemplate-->JDO(Java Data Object)-->JPA(Java Persistence API)
+	1. The Java Persistence API is designed for operating Domain Objects.
+	2. The JPA is replacing the JDBC API and JDBC template and JDO objects for new level of transformations.
+	3. There are various persistent units which is used for the JPA implementation like Oracle TopLink, Hibernate
+	   CoreAPI
+	4. We are using JPA 2.1 version for converters, bulk updates, stored procedures, listeners,etc.
+	5. In the JPA API implementation we used EntityManager which is managing the complete entity management with persistence.
+	
