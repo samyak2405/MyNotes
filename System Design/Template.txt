@@ -69,3 +69,44 @@
 	- Improve performance and scalability of DB as each server can process queries and updates more efficiently when it is working with smaller amount of data.
 	- Range-based sharding
 		- Data is partitioned based on a key value, such as a userID or a timestamp
+		- Data is distributed across the shards based on the range of the key value.
+		- Eg: All IDs from 1-1000 might be stored on one shard, while user IDs in the range of 10001-2000 on another shard.
+	- Hash-based sharding
+		- A hash function is used to distribute the data across the shards based on the key value.
+		- Ex: All data with a user ID of 123 might be stored on one shard, while data with a user ID of 456 might be stored on another shard.
+	- Directory-based sharding
+		- A central directory is used to map the key values to the specific shard where the data is stored.
+		- Directory can be used to determine which shard a piece of data belongs to and the data can be retrieved from the appropriate shard.
+	- Custom Sharding
+		- It my involve combination of different sharding methods or a completely unqiue approach.
+9. Database Replication
+	- Process of copying and synchronizing data from one database to one or more additional databases.
+	- Commonly used in distributed systems where multiple copies of the same data are required to ensure data availability, fault tolerance and scalability.
+10. Distributed Messaging sytems
+	- Enable exchange of messages between multiple, potentially geographically-dispersed applications, services, or components in a reliable, scalable and 
+	  fault-tolerant manner.
+	- Facilitate communication by decoupling the sender and reciever components, allowing them to evolve and operate independently.
+	- Ex: Systems such as Apache Kafka and RabbitMQ
+11. Distributed File Systems
+	- Storage solutions designed to manager and provide access to files and directories across multiple servers, nodes or machines often distributed over a n/w.
+	- Enable users and applications to access and manipulate files as if they were stored on a local file system, even though the actual files might be physically stored
+	  on multiple remote servers.
+	- Often used in large-scale or distributed computing environments to provide fault tolerance, high availability and improved performance.
+12. Notification System
+	- Used to send notifications or alerts to users, such as emails, push notifications or text messages.
+13. Full-text Search
+	- Enables users to search for specific words or phrases within an app or website.
+	- When a user queries, the app or website returns the most relevant results.
+	- Relies on an inverted index, which is a data structure that maps words or phrases to the documents in which they appear.
+	- Ex: Elastic Search
+14. Data Warehouse
+	- Large, centralized repository of structured and historical data used for reporting, analysis and decision-making purposes
+	  within an organization.
+	- Collects, stores and manages data from various sources such as transactional databases, external data sources and application systems and organizes it in a way
+	  that facilitates efficient querying and reporting.
+	- Support efficient retrieval and analysis of large volumes of data, enabling organizations to gain insights and make data-driven decisions.
+	- Store data in a highly structured format, often using a schema design, such as the star or snowflake schema, to optimize query performance.
+15. Distributed Coordination Services
+	- System designed to manage and coordinate the activities of distributed applications, services or nodes in a reliable, efficient and fault tolerant manner.
+	- Help maintain consistency, handle distributed synchronization, and manager the configuration and state of various components in a distributed environment.
+	- Ex: Apache ZoopKeeper, etcd, Consul.
