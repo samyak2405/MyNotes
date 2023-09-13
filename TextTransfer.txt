@@ -51,3 +51,23 @@ Caused by: java.lang.IllegalArgumentException: Unsupported class file major vers
 	at org.jacoco.agent.rt.internal_1f1cc91.core.instr.Instrumenter.instrument(Instrumenter.java:86)
 	at org.jacoco.agent.rt.internal_1f1cc91.core.instr.Instrumenter.instrument(Instrumenter.java:118)
 	... 39 more
+
+
+   <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.8</version> <!-- Use the latest version of JaCoCo -->
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>prepare-agent</goal>
+                    </goals>
+                </execution>
+                <execution>
+                    <id>report</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>report</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
