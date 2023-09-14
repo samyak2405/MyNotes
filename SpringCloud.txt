@@ -1,0 +1,15 @@
+Spring Cloud
+	- Provide tools to build common patterns in Distributed systems
+	Features
+		1. Distributed/versioned configuration
+		2. Service registration and discovery
+		3. Routing
+		4. Service-to-Service calls
+		5. Load Balancing
+		6. Circuit Breakers
+		7. Global locks
+		8. Leadership election and cluster state
+		9. Distributed messaging
+	
+To see how the spring executes a project add following line in application.properties
+logging.level.org.springframework=debug

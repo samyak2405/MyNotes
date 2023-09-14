@@ -1,0 +1,37 @@
+STEPS:
+
+1. INSTALL KAFKA FROM GIVEN LIKE SCALA 2.13
+
+2.EXtract to a new folder "kafka" 
+D:\kafka
+
+3. go to config/server.properties and change  log.dirs as below
+log.dirs=D:\kafka\data\broker
+
+4. go to config/zookeeper.properties and change dataDir as below
+dataDir=D:\kafka\data\zookeeper
+
+5. open terminal in kafka2_13 folder
+
+6. run the following command to up the zookeeper:
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+7. run the following command to up kafka:
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+8. Done :D
+
+TOPIC CREATION
+kafka-topics.bat --create --topic TestTopic --bootstrap-server localhost:9092
+
+List Topics:
+kafka-topics.bat --list --bootstrap-server localhost:9092
+
+Producer command:
+kafka-console-producer.bat --topic TestTopic --bootstrap-server localhost:9092
+
+Consumer command:
+kafka-console-consumer.bat --topic TestTopic --bootstrap-server localhost:9092
+
+https://www.geeksforgeeks.org/spring-boot-pass-json-object-into-kafka-topic/
+https://www.geeksforgeeks.org/spring-boot-consume-json-object-from-kafka-topics/
