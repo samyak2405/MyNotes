@@ -63,7 +63,7 @@
 ### 3. Different types of Payment methods
 1. India
 | Payment Methods | Regulated by | Speed of Settlement | Minimum Transfer | Maximum transfer | Payment Options | Charges |
-| --------------- | ------------ | ------------------- | ---------------- | ---------------- | --------------- | -------- |
+| --------------- | ------------ | ------------------- | ---------------- | ---------------- | --------------- | ------- |
 | NEFT(National Electronic Fund Transfer) | Regulated by RBI | Half-hourly batches |  Rs 1 | No limit | Online, Offline | No charges |
 | RTGS(Real Time Gross Settlement) | Regulated by RBI | Immediate Settlement | Rs. 2 Lakh | No Limit | Online, Offline | Differs based on bank and amount |
 | IMPS(Immediate Payment Service) | Regulated by NPCI(National Payments Corporation of India) | Immediate Settlement | Rs. 5 | Rs. 2 Lakh | Online | Differs based on bank and amount |
@@ -72,14 +72,14 @@
 | BNPL (Buy now pay later) | Regulated by private entities adhering to RBI norms | Offline merchant settlement | No minimum transfer | Depends on Customer | Online | Varies by merchant |
 
 2. EMEA
-| Payment Methods | Convenience/Checkout UX differences | Coverage | Cost Difference | Settlement speed | Chargeback risk difference |
-| --------------- | ----------------------------------- | -------- | --------------- | ---------------- |
+| Payment Methods | Convenience(Checkout UX differences) | Coverage | Cost Difference | Settlement speed | Chargeback risk difference |
+| --------------- | ----------------------------------- | -------- | --------------- | ---------------- | ----------------------- |
 | Payment cards and card-based wallets | High | Global | High | 1-3 days | Yes |
 | Instant bank transfers | Medium | Local | Low | 1 day | No | 
 | Mobile Payments or digital money wallets | High | Local or Global | Medium to High | 1-3 days | No |
 | Local card schemes | High | Local | Medium | 1-3 days | Yes |
 | Cash APMs | Low | Local | Low | 1-30 days | No |
-| Credit(Instalments/BNPL) | Medium | Local | High | 1-2 days | No |
+| Credit(Instalments-BNPL) | Medium | Local | High | 1-2 days | No |
 
 ### 4. Alternative Payment methods
 **India**
@@ -357,3 +357,106 @@ PayU has the highest level of PCI compliance(Level 1), and because we maintain c
 7. Card fraud is a sophisticated theft called valid fraud. It involves logival duplication of personal card details such that there is no place doubt. To overcome this threa advanced AI & ML technologies are used.
 8. 2FA demands details which will be a combination of something you know, something you have or something you are.
 9. Payment Card Industry Data Security Standard(PCI DSS) is a global compliance entity that accepts and handles payment card data or PII data, it is applicable to any organization or company, regardless of size or number of transactions.
+
+## Payments Business Model
+- PayU acts as the payment gateway service provider that bridges the gap between customers, banks and merchants.
+- PayU passes all the sensitive information like customer's payment card number, OTP and so on, from one end to the other
+
+### 1. Payment Flow
+Lets say you spend $100 in starbucks.
+1. The merchant will pass $100 request to the acquirer through the payment gateway which is PayU
+2. The payment switch from the acquirer will take this $100 and pass it to the payment network Visa. The acquirer submits a $100 authorization to Visa.
+3. Visa submits a $100 authorization to the issuer
+4. The issuer will validate if the cardholder has enough balance in their account.
+5. They will respond.
+6. After checking the buyer's ability to pay the $100, the issuer returns a response for a $100 authorization to Visa.
+7. Visa then sends the response of the $100 authorization to the acquirer.
+   
+### 2. Payment Processing
+1. Total Number of Payment Transactions(TPT) "X"
+   - Toal number of Payments, net off payments reversals, successfully completed on our payments platform
+2. Total Payment Volume(TPV) "Y"
+   - Total Payment Volume or TPV is the INR value of payments successfully processed.
+3. Average Ticket Size # "Y/X"
+   - Average value of each transaction
+4. Take rate % "p"
+   - Fee charged by PayU for processing the transaction
+5. Revenue "A=p*Y"
+   - A function of take rate and TPV but we also have other revenue streams like subscription, setup fees, flat fee per transaction, etc.
+6. Buy rate % "q"
+   - The cost of processing that PayU pays to banks, networks and other participants in the payments value chain
+7. Cost of sales/Cost of Providing Services(COPS) "B=q*Y"
+   - Cost of processing transactions for the merchants
+8. Gross Margin (GM) "C=A-B"
+   - Earning after subtracting the cost of sales from revenue
+9.  Gross Margin (GM%) "C/A"
+   - Percentage Gross Margin taken on Revenue
+10. Selling, General and Administrative (SG&A) "D"
+   - Selling, General and Administrative expenses is the cost of doing business - staff costs, IT related costs, rent, marketing, depreciation, etc.
+11. Trading Profit (TP) "E=A-(B+D)"
+   - The operational profit that PayU makes
+12. Trading Profit Margin Percentage (TPM%) "E/A"
+   - Profit percentage taken on revenue.
+
+### 3. PayU revenue
+PayU gets revenue from Value Added Services(VAS) that it offers to merchants for online payment gateway.
+1. Tokenization
+2. SI hub
+3. Payouts
+4. Payment links
+5. Fraud
+
+### 4. EMEA Revenue
+1. Currency Exchange
+2. Payouts
+3. Dispute management
+4. Authentication
+5. Fraud monitoring
+6. Payment optimization
+
+### 5. Wibmo Revenue
+1. Transaction security to issuers
+2. Payment gateway for acquirers
+3. Fraud services
+4. Prepaid
+5. Digital wallet services are offered to issuers
+
+### 6. Types of Product provided by PayU Finance
+1. BNPL(Buy Now Pay Later): Short-term financing(15 days)
+   - Allows consumers to make purchases and pay for them at a future date
+   - Often interest-free
+   - PayU offers LazyPay as a BNPL product in the India market.
+   - Low ticket size and short duration
+2. Personal Loan
+   - An unsecured credit provided by financial institutions
+   - Higher ticket size than BNPL
+   - Offers longer duration
+3. Checkout Finance
+   - EMI - based product to finance online purchases, for Eg: Buying products on Flipkart
+   - Ticket size is smaller than personal loans but larger than BNPL.
+
+Metrics
+1. Issuance
+   - Monetary value of loans issued in a given period 
+   - Includes both BNPL and personal loans
+2. Asset under Management(AuM)
+   - Total outstanding load balancing at the end of the year.
+   - BNPL has the smallest tenure and personal loans have the highest.
+   - Therefore, personal loans are the biggest contributor to AuM
+3. Revenue(A)
+   - The interest charged on personal loans and checkout finance
+   - In BNPL, we charge a commission from merchants
+   - Other income includes processing fees, late fees, etc.
+4. Cost of funds(B)
+   - Cost of borrowing capital to issue loans
+5. Loss provisions(C)
+   - Expected losses from loans that may not be fully repaid
+6. Direct expenses(D)
+   - Underwriting: The process through which an individual or institution takes on financial risk for a fee
+   - Collection cost: The cost incurred to collect debts that is owed
+7. Contribution margin E = A-(B+C+D)
+   - Operating profit
+8. SG&A (F)
+   - Cost of doing business: Cost of acquiring customers, staff costs, IT related costs, rent, marketing, deprecation, etc.
+9.  Trading profit (G=E-F)
+   - Trading profit represents the operational profit that PayU makes
