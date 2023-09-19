@@ -145,3 +145,73 @@ Crore -> Koti
 6. I don't like banana -> Nanage baale hannu ista illa
 7. Which fruit you like? -> Nimage yava hannu ista?
 
+## Verbs
+### When we tell about ourselves
+| Verb(Kannada/English) | I+Past | I+Present Continous | I + Future |
+| ----------- | ----------- | -------------------- | ----------- |
+| Madu(Do) | Mad-de | Madta Idini | Mad-thini |
+| Nodu(See) | Nod-de | Nodta Idini | Nod-thini |
+| Kelu(Ask) | Kel-de | kelta Idini | Kel-thini |
+| Kodi(Give) | Kotte | Kodta Idini | Kod-thini |
+
+### Sentence
+I did my homework -> Naanu homework Mad-de
+I am doing my homework -> Naanu homework Madta Idini
+I will do my homework -> Naanu homework Mad thini
+I saw mobile -> Naanu mobile Nod-de
+I am seeing mobile -> Naanu mobile Nodta Idini
+I will see mobile -> Naanu mobile Nod-thini
+I gave you chocolate -> Naanu kotte Neenu chocolate
+I am giving you chocolate -> Naanu kodta idini Neenu chocolate
+I will give you chocolate -> Naanu kod-thini Neenu chocolate
+
+### When we tell about others
+| Verb(Kannada/English) | I+Past | I+Present Continous | I + Future |
+| ----------- | ----------- | -------------------- | ----------- |
+| Madu(Do) | Mad-dru | Madta Idare | Mad-thare |
+| Nodu(See) | Nod-dru | Nodta Idare | Nod-thare |
+| Kelu(Ask) | Kel-dru | kelta Idare | Kel-thare |
+| Kodi(Give) | Kot-tru | Kodta Idare | Kod-thare |
+
+###
+| Verb | In Sentences with I | Questions with I |
+| ----------- | ----------- | -------------------- |
+| Madu(Do) | Mad-dhe | Madidna? |
+| | Madtha ideeni| Madtha Idina? |
+| | Madthini | Madthina? | 
+
+| Verb | In Sentences with They | Questions with They eg. oota |
+| ----------- | ----------- | -------------------- |
+| Madu(Do) | Madidru/Mad-dru | Madidra? |
+|| Madtha Idare | Madtha idara? |
+|| Madthare | Madthara? | 
+
+### Sentence
+Did you watch movie -> Neevu movie nodudra?
+Are you watching movie -> Neevu movie nodtha idira?
+Will you watch movie > Neevu movie nodtheera?
+
+En Madtha Ideera? -> What are you doing?
+Listening to music -> Music kelta idini
+
+What is your tomorrow's plan?
+-> Nale Plan Enu?
+
+Are you going to Park tomorrow?
+Neevu Park Hogtheera?
+
+Thoda thoda -> Swalp Swalp
+Kya hua? -> Aenayetu
+Kuch nahi -> Enu illa
+Kya mai ja sakta hu -> Naanu Hogbahude
+Jarur -> Arthwahite
+
+
+| Verb | In Sentences with We | Questions with We |
+| ----------- | ----------- | -------------------- |
+| Madu(Do) | Madudhvi | Madudva? |
+|| Madtha Ideevi | Madtha Ideeva? |
+|| Madtheevi | Madtheeva? | 
+
+
+
